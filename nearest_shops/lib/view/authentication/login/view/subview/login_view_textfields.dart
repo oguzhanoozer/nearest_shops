@@ -44,4 +44,12 @@ Widget buildPasswordTextField(
           hintText: "example@email.com"),
     );
   }
+  Container buildContainerIconField(BuildContext context, IconData icon) {
+    return Container(
+      // color: context.colors.onError,
+      padding: context.paddingLow,
+      child: Icon(icon, color: context.appTheme.colorScheme.onSurfaceVariant),
+    );
+  }
+
 }

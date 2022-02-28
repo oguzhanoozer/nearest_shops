@@ -7,6 +7,8 @@ abstract class  LocaleKeys {
   static const email = 'email';
   static const loginButtonText = 'loginButtonText';
   static const password = 'password';
+  static const enterPassword = 'enterPassword';
+  static const againPassword = 'againPassword';
   static const welcomeBack = 'welcomeBack';
   static const createAccount = 'createAccount';
   static const forgotPassword = 'forgotPassword';

@@ -21,8 +21,10 @@ class CodegenLoader extends AssetLoader{
   "email": "Email",
   "loginButtonText": "Login",
   "password": "Password",
+  "enterPassword": "Enter password",
+  "againPassword": "Enter again password",
   "welcomeBack": "Welcome Back",
-  "createAccount": "Create account",
+  "createAccount": "Create Account",
   "forgotPassword": "Forgot Password",
   "theFieldRequired": "This field required.",
   "enterValidEmail": "Enter a valid email."
@@ -34,8 +36,10 @@ static const Map<String,dynamic> tr = {
   "email": "Email",
   "loginButtonText": "Giriş Yap",
   "password": "Şifre",
+  "enterPassword": "Şifre giriniz",
+  "againPassword": "Şifreyi yeniden giriniz",
   "welcomeBack": "Tekrar Hoşgeldiniz",
-  "createAccount": "Hesap oluştur",
+  "createAccount": "Hesap Oluştur",
   "forgotPassword": "Şifremi unuttum",
   "theFieldRequired": "Bu alanın doldurulması gerekiyor.",
   "enterValidEmail": "Geçerli bir email adresi giriniz."
