@@ -9,9 +9,9 @@ extension StringEmailExtension on String {
 }
 
 extension ImageSVGPathExtension on String {
-  String get toSVG => "assets/svg/$this.svg";
+  String get toSVG => "asset/svg/$this.svg";
 }
 
 extension ImagePathExtension on String{
-  String get toImagePath => "assets/image/$this.png";
+  String get toImagePath => "asset/image/$this.png";
 }

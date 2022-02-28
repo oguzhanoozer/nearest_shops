@@ -19,7 +19,36 @@ abstract class ThemeManager {
       colorScheme: theme.colors.colorScheme,
       scaffoldBackgroundColor: theme.colors.scaffoldBackgroundColor,
       appBarTheme:
-          AppBarTheme(backgroundColor: theme.colors.appBarColor, elevation: 0));
+          AppBarTheme(backgroundColor: theme.colors.appBarColor, elevation: 0),
+      inputDecorationTheme: buildInputDecorationTheme(theme));
+}
+
+InputDecorationTheme buildInputDecorationTheme(ITheme theme) {
+  return InputDecorationTheme(
+      //  helperStyle: TextStyle(color: Colors.red),
+      // counterStyle: TextStyle(color: Colors.red),
+      floatingLabelStyle: TextStyle(color: theme.colors.colors.orange),
+      focusColor: Colors.black12,
+      filled: true,
+      errorStyle: TextStyle(color:theme.colors.colors.orange),
+      fillColor: theme.colors.colors.lightGray,
+      labelStyle: TextStyle(),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: theme.colors.colors.orange, width: 0.3),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: theme.colors.colors.lightGray),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      border: OutlineInputBorder(
+        borderSide: BorderSide(color: theme.colors.colors.orange),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: theme.colors.colors.darkGrey),
+        borderRadius: BorderRadius.circular(10),
+      ));
 }
 
 class AppThemeDark extends ITheme {
@@ -35,5 +64,5 @@ class AppThemeLight extends ITheme {
   IColors get colors => LightColors();
 
   @override
-  ITextTheme get textTheme => TextThemeLight(colors.colors.mediumGrey);
+  ITextTheme get textTheme => TextThemeLight(colors.colors.darkerGrey);
 }

@@ -7,6 +7,7 @@ import 'core/init/lang/codegen_loader.g.dart';
 import 'core/init/lang/language_manager.dart';
 import 'core/init/notifier/provider_list.dart';
 import 'core/init/theme/app_theme.dart';
+import 'view/authentication/login/view/login_view.dart';
 
 Future<void> main() async {
   await _init();
@@ -18,6 +19,7 @@ Future<void> main() async {
         supportedLocales: LanguageManager.instance.supportedLocales,
         fallbackLocale: LanguageManager.instance.trLocale,
         assetLoader: const CodegenLoader(),
+        saveLocale:true,
         startLocale: LanguageManager.instance.trLocale,
         child: MainHome(),
       ),
@@ -43,16 +45,7 @@ class MainHome extends StatelessWidget {
       //navigatorKey: NavigationService.instance!.navigatorKey,
       title: 'Material App',
       theme: ThemeManager.createTheme(AppThemeLight()),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Material App Bar'),
-        ),
-        body: Center(
-          child: Container(
-            child: Text('Hello World'),
-          ),
-        ),
-      ),
+      home: SafeArea(child: LoginView()),
     );
   }
 }

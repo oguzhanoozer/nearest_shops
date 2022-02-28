@@ -27,7 +27,7 @@ class DarkColors implements IColors {
   Color? tabbarSelectedColor;
 
   AppColors colors = AppColors();
-  
+
   DarkColors() {
     appBarColor = colors.darkGrey;
     scaffoldBackgroundColor = colors.darkGrey;
