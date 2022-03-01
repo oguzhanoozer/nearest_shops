@@ -9,6 +9,7 @@ import 'core/init/notifier/provider_list.dart';
 import 'core/init/theme/app_theme.dart';
 import 'view/authentication/login/view/login_view.dart';
 import 'view/authentication/register/view/register_view.dart';
+import 'view/home/dashboard/view/dashboard_view.dart';
 
 Future<void> main() async {
   await _init();
@@ -46,7 +47,7 @@ class MainHome extends StatelessWidget {
       //navigatorKey: NavigationService.instance!.navigatorKey,
       title: 'Material App',
       theme: ThemeManager.createTheme(AppThemeLight()),
-      home: SafeArea(child: RegisterView()),
+      home: SafeArea(child: DashboardView()),
     );
   }
 }
