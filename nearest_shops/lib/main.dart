@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'view/home/product_detail/view/product_detail_view.dart';
 import 'package:provider/provider.dart';
 
 import 'core/constants/application_constants.dart';
@@ -21,7 +22,7 @@ Future<void> main() async {
         supportedLocales: LanguageManager.instance.supportedLocales,
         fallbackLocale: LanguageManager.instance.trLocale,
         assetLoader: const CodegenLoader(),
-        saveLocale:true,
+        saveLocale: true,
         startLocale: LanguageManager.instance.trLocale,
         child: MainHome(),
       ),

@@ -1,7 +1,8 @@
-import 'package:flutter/src/painting/text_style.dart';
-import 'package:flutter/src/material/text_theme.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'dart:ui';
+
+import 'package:flutter/src/material/text_theme.dart';
+import 'package:flutter/src/painting/text_style.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'text_theme_manager.dart';
 

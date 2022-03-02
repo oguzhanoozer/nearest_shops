@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kartal/kartal.dart';
-import 'package:nearest_shops/view/authentication/register/viewmodel/register_view_model.dart';
+import '../viewmodel/register_view_model.dart';
 
 import '../../../../core/base/view/base_view.dart';
 import '../../../../core/components/border/circular_border_radius.dart';

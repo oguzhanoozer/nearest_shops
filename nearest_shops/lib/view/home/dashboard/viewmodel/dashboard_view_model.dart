@@ -1,7 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:nearest_shops/view/product/contstants/image_path.dart';
 
-import '../model/dashboard_ads_slider_model.dart';
+import '../../../product/contstants/image_path.dart';
 import '../model/dashboard_model.dart';
 
 part 'dashboard_view_model.g.dart';

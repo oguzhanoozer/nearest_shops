@@ -3,6 +3,7 @@ import 'package:kartal/kartal.dart';
 
 import '../../home/dashboard/model/dashboard_ads_slider_model.dart';
 import '../../home/dashboard/model/dashboard_model.dart';
+import 'circle_indicator_list.dart';
 
 class DashboardAdsSlider extends StatefulWidget {
   final List<DashboardModel>? dashboardModelList;
@@ -25,26 +26,11 @@ class _DashboardAdsSliderState extends State<DashboardAdsSlider> {
         ),
         Expanded(
           flex: 1,
-          child: buildCircleIndicator(),
+          child: BuildCircleIndicator(
+              currentIndex: _selectedCurrentIndex,
+              length: widget.dashboardModelList!.length),
         )
       ],
-    );
-  }
-
-  ListView buildCircleIndicator() {
-    return ListView.builder(
-      itemCount: widget.dashboardModelList!.length,
-      scrollDirection: Axis.horizontal,
-      shrinkWrap: true,
-      itemBuilder: (context, index) => Padding(
-        padding: EdgeInsets.all(context.dynamicHeight(0.005)),
-        child: CircleAvatar(
-          backgroundColor: _selectedCurrentIndex == index
-              ? context.colorScheme.onSurfaceVariant
-              : context.colorScheme.onSurfaceVariant.withOpacity(0.3),
-          radius: 5,
-        ),
-      ),
     );
   }
 
