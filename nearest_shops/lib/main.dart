@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'view/home/owner_product_list/view/owner_product_list_view.dart';
 import 'view/home/product_detail/view/product_detail_view.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +49,7 @@ class MainHome extends StatelessWidget {
       //navigatorKey: NavigationService.instance!.navigatorKey,
       title: 'Material App',
       theme: ThemeManager.createTheme(AppThemeLight()),
-      home: SafeArea(child: DashboardView()),
+      home: SafeArea(child: OwnerProductListView()),
     );
   }
 }

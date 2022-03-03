@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
+import 'package:nearest_shops/view/product/slider/slider_card.dart';
 
 import '../../home/dashboard/model/dashboard_ads_slider_model.dart';
 import '../../home/dashboard/model/dashboard_model.dart';
@@ -62,48 +63,7 @@ class _DashboardAdsSliderState extends State<DashboardAdsSlider> {
   Widget buildImageNetwork(BuildContext context, int index) {
     return Padding(
       padding: context.paddingNormal,
-      child: Card(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-            side: BorderSide(width: 1, color: Colors.orange[100]!)),
-        child: Padding(
-          padding: context.paddingNormal,
-          child: Row(
-            children: [
-              Expanded(
-                //child: Image.network(widget.dashboardModelList![index].url ?? "",
-                child: Image.asset(widget.dashboardModelList![index].url ?? "",
-                    fit: BoxFit.fill),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      widget.dashboardModelList![index].title ?? "",
-                      style: context.textTheme.headline4!.copyWith(
-                          fontWeight: FontWeight.bold, color: Colors.black),
-                    ),
-                    Text(widget.dashboardModelList![index].title ?? ""),
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          widget.dashboardModelList![index].price ?? "",
-                          style: context.textTheme.headline6!
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        Icon(Icons.shopping_bag),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      child: SliderCard(dashboardModel:  widget.dashboardModelList![index], context: context)
     );
   }
 }
