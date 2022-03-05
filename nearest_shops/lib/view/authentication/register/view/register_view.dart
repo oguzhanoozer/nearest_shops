@@ -1,22 +1,14 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:kartal/kartal.dart';
-import '../viewmodel/register_view_model.dart';
 
 import '../../../../core/base/view/base_view.dart';
-import '../../../../core/components/border/circular_border_radius.dart';
-import '../../../../core/components/button/icon_button.dart';
 import '../../../../core/components/button/normal_button.dart';
 import '../../../../core/components/button/text_button.dart';
 import '../../../../core/components/column/form_column.dart';
 import '../../../../core/extension/string_extension.dart';
-import '../../../../core/init/lang/language_manager.dart';
 import '../../../../core/init/lang/locale_keys.g.dart';
-
-import '../../../product/contstants/image_path_svg.dart';
-import '../../login/viewmodel/login_view_model.dart';
+import '../viewmodel/register_view_model.dart';
 
 part 'subview/register_view_textfields.dart';
 
@@ -79,7 +71,6 @@ class RegisterView extends StatelessWidget {
       ],
     );
   }
-
 
   Widget buildWelcomeTextColumnBuild(BuildContext context) {
     return Column(

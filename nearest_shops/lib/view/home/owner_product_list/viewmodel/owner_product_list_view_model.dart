@@ -2,6 +2,7 @@ import 'package:mobx/mobx.dart';
 
 import '../../../product/contstants/image_path.dart';
 import '../../dashboard/model/dashboard_model.dart';
+
 part 'owner_product_list_view_model.g.dart';
 
 class OwnerProductListViewModel = _OwnerProductListViewModelBase

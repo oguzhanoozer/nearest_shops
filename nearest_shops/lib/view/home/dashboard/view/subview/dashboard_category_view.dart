@@ -55,4 +55,39 @@ extension _DashboardProductsWidgets on DashboardView {
       ),
     );
   }
+
+  InputDecoration buildInputDecoration(BuildContext context) {
+    return InputDecoration(
+      fillColor: context.colorScheme.surface.withOpacity(0.05),
+      contentPadding: EdgeInsets.zero,
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          width: 0.5,
+          color: context.colorScheme.surface.withOpacity(0.3),
+        ),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: context.colorScheme.onSecondary),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      disabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: context.colorScheme.onSecondary),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: context.colorScheme.onSecondary),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      prefixIcon:
+          Icon(Icons.search, color: context.colorScheme.surface, size: 20),
+      hintStyle: TextStyle(fontSize: 15, color: context.colorScheme.surface),
+      hintText: "Search product",
+      suffixIcon: Icon(
+        Icons.filter_list_outlined,
+        size: 30,
+        color: context.colorScheme.onSurfaceVariant,
+      ),
+    );
+  }
 }

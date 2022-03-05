@@ -24,85 +24,108 @@ class ProductDetailView extends StatelessWidget {
       BuildContext context, ProductDetailViewModel viewModel) {
     return Scaffold(
       appBar: buildAppBar(context),
-      body: Padding(
-        padding: context.paddingLow,
-        child: Column(
-          children: [
-            Expanded(
-                flex: 2,
-                child: DashboardAdsSlider(
-                    dashboardModelList: viewModel.dashboardModelList)),
-            Expanded(
+      body: buildProductDetail(context, viewModel),
+    );
+  }
+
+  Padding buildProductDetail(
+      BuildContext context, ProductDetailViewModel viewModel) {
+    return Padding(
+      padding: context.paddingLow,
+      child: Column(
+        children: [
+          Expanded(
               flex: 2,
-              child: Padding(
-                padding: context.horizontalPaddingNormal,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Car Cleaner",
-                          style: context.textTheme.headline6!.copyWith(
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "\$250",
-                          style: context.textTheme.headline5!.copyWith(
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                        ),
-                        Text(
-                          "(4,5)",
-                          style: context.textTheme.bodyText2!.copyWith(
-                              color: Colors.yellow,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: context.verticalPaddingNormal,
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: AutoSizeText(
-                                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
-                                      " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
-                                      " when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
-                                      "It has survived not only five centuries, but also the leap into electronic typesetting, " +
-                                      "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                                  style: context.textTheme.headline6!),
-                            ),
-                            NormalButton(
-                              child: Text(
-                                "See our other products",
-                                style: context.textTheme.headline6!.copyWith(
-                                    color: context.colorScheme.onSecondary),
-                              ),
-                              onPressed: null,
-                              color:
-                                  context.appTheme.colorScheme.onSurfaceVariant,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              child: DashboardAdsSlider(
+                dashboardModelList: viewModel.dashboardModelList,
+                onlyImage: true,
+              )),
+          Expanded(
+            flex: 2,
+            child: Padding(
+              padding: context.horizontalPaddingNormal,
+              child: buildDetailColumn(context),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Column buildDetailColumn(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            buildProductTitle(context),
+            buildProductPrice(context),
           ],
         ),
-      ),
+        buildProductPoint(context),
+        Expanded(
+          child: Padding(
+            padding: context.verticalPaddingNormal,
+            child: buildProductBody(context),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Column buildProductBody(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          child: AutoSizeText(
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
+                  " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
+                  " when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
+                  "It has survived not only five centuries, but also the leap into electronic typesetting, " +
+                  "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+              style: context.textTheme.headline6!),
+        ),
+        NormalButton(
+          child: Text(
+            "See our other products",
+            style: context.textTheme.headline6!
+                .copyWith(color: context.colorScheme.onSecondary),
+          ),
+          onPressed: null,
+          color: context.appTheme.colorScheme.onSurfaceVariant,
+        ),
+      ],
+    );
+  }
+
+  Row buildProductPoint(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Icon(Icons.star, color: context.colorScheme.inversePrimary),
+        Text(
+          "(4,5)",
+          style: context.textTheme.bodyText2!.copyWith(
+              color: context.colorScheme.inversePrimary,
+              fontWeight: FontWeight.bold),
+        ),
+      ],
+    );
+  }
+
+  Text buildProductPrice(BuildContext context) {
+    return Text(
+      "\$250",
+      style: context.textTheme.headline5!.copyWith(
+          color: context.colorScheme.primary, fontWeight: FontWeight.bold),
+    );
+  }
+
+  Text buildProductTitle(BuildContext context) {
+    return Text(
+      "Car Cleaner",
+      style: context.textTheme.headline6!.copyWith(
+          color: context.colorScheme.primary, fontWeight: FontWeight.bold),
     );
   }
 
@@ -112,8 +135,8 @@ class ProductDetailView extends StatelessWidget {
         padding: context.horizontalPaddingLow,
         child: Icon(
           Icons.cancel,
-          color: Colors.grey[400],
-          size: 40,
+          color: context.colorScheme.onPrimary,
+          size: context.dynamicHeight(0.03),
         ),
       ),
       actions: [
@@ -121,8 +144,8 @@ class ProductDetailView extends StatelessWidget {
           padding: context.horizontalPaddingLow,
           child: Icon(
             Icons.favorite,
-            color: Colors.grey[400],
-            size: 40,
+            color: context.colorScheme.onPrimary,
+            size: context.dynamicHeight(0.03),
           ),
         )
       ],

@@ -11,7 +11,10 @@ class AppColors {
   final Color darkerGrey = Color(0xff404e5a);
   final Color darkGrey = Color(0xff4e5d6a);
   final Color orange = Color(0xffff9840);
+  final Color lightOrange = Color(0xFFFFF3E0);
   final Color black = Color(0xff000000);
+  final Color grey = Color(0xFF9E9E9E);
+  final Color yellow = Color(0xFFFFEB3B);
 }
 
 abstract class IColors {

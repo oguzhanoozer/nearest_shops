@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
-import 'package:nearest_shops/view/product/slider/slider_card.dart';
+import 'slider_card.dart';
 
 import '../../home/dashboard/model/dashboard_ads_slider_model.dart';
 import '../../home/dashboard/model/dashboard_model.dart';
@@ -8,8 +8,11 @@ import 'circle_indicator_list.dart';
 
 class DashboardAdsSlider extends StatefulWidget {
   final List<DashboardModel>? dashboardModelList;
+  final bool onlyImage;
 
-  DashboardAdsSlider({Key? key, this.dashboardModelList}) : super(key: key);
+  DashboardAdsSlider(
+      {Key? key, this.dashboardModelList, required this.onlyImage})
+      : super(key: key);
 
   @override
   State<DashboardAdsSlider> createState() => _DashboardAdsSliderState();
@@ -62,8 +65,10 @@ class _DashboardAdsSliderState extends State<DashboardAdsSlider> {
 
   Widget buildImageNetwork(BuildContext context, int index) {
     return Padding(
-      padding: context.paddingNormal,
-      child: SliderCard(dashboardModel:  widget.dashboardModelList![index], context: context)
-    );
+        padding: context.paddingNormal,
+        child: SliderCard(
+            dashboardModel: widget.dashboardModelList![index],
+            context: context,
+            onlyImage: widget.onlyImage));
   }
 }
