@@ -1,13 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'core/constants/application_constants.dart';
+import 'core/constants/navigation/navigation_service.dart';
 import 'core/init/lang/codegen_loader.g.dart';
 import 'core/init/lang/language_manager.dart';
 import 'core/init/notifier/provider_list.dart';
 import 'core/init/theme/app_theme.dart';
-import 'view/home/dashboard/view/dashboard_view.dart';
+import 'view/authentication/onboard/view/onboard_view.dart';
 
 Future<void> main() async {
   await _init();
@@ -29,10 +31,13 @@ Future<void> main() async {
 
 Future<void> _init() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await EasyLocalization.ensureInitialized();
 }
 
 class MainHome extends StatelessWidget {
+  final Future<FirebaseApp> _initalizeFirebaseApp = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -42,10 +47,25 @@ class MainHome extends StatelessWidget {
       locale: context.locale,
 
       //onGenerateRoute: NavigationRoute.instance!.generateRoute,
-      //navigatorKey: NavigationService.instance!.navigatorKey,
+      navigatorKey: NavigationService.instance!.navigatorKey,
       title: 'Material App',
       theme: ThemeManager.createTheme(AppThemeLight()),
-      home: SafeArea(child: DashboardView()),
+      home: FutureBuilder(
+        future: _initalizeFirebaseApp,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text("There is an error"),
+            );
+          } else if (snapshot.hasData) {
+            return SafeArea(child: OnBoardView());
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
     );
   }
 }

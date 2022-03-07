@@ -11,6 +11,8 @@ import '../../../../core/components/column/form_column.dart';
 import '../../../../core/extension/string_extension.dart';
 import '../../../../core/init/lang/locale_keys.g.dart';
 import '../../../product/contstants/image_path_svg.dart';
+import '../../onboard/view/onboard_view.dart';
+import '../../register/view/register_view.dart';
 import '../viewmodel/login_view_model.dart';
 
 part 'subview/login_view_textfields.dart';
@@ -22,7 +24,10 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseView<LoginViewModel>(
         viewModel: LoginViewModel(),
-        onModelReady: (model) {},
+        onModelReady: (model) {
+          model.setContext(context);
+          model.init();
+        },
         onPageBuilder: (BuildContext context, LoginViewModel viewModel) {
           return buildScaffold(context, viewModel);
         });
@@ -30,18 +35,19 @@ class LoginView extends StatelessWidget {
 
   Scaffold buildScaffold(BuildContext context, LoginViewModel viewModel) =>
       Scaffold(
+          key: viewModel.scaffoldState,
           body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Spacer(
-            flex: 1,
-          ),
-          Expanded(
-            flex: 4,
-            child: buildLoginForm(context, viewModel),
-          ),
-        ],
-      ));
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Spacer(
+                flex: 1,
+              ),
+              Expanded(
+                flex: 4,
+                child: buildLoginForm(context, viewModel),
+              ),
+            ],
+          ));
 
   Container buildLoginForm(BuildContext context, LoginViewModel viewModel) {
     return Container(
@@ -71,11 +77,11 @@ class LoginView extends StatelessWidget {
         ),
         buildLoginButton(context, viewModel),
 
-        buildCreateAccountButton(),
+        buildCreateAccountButton(context),
         Spacer(
           flex: 4,
         ),
-        buildSocialMediaIcons(context),
+        buildSocialMediaIcons(context, viewModel),
         Spacer(
           flex: 1,
         ),
@@ -83,7 +89,7 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  Row buildSocialMediaIcons(BuildContext context) {
+  Row buildSocialMediaIcons(BuildContext context, LoginViewModel viewModel) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -105,7 +111,9 @@ class LoginView extends StatelessWidget {
           ),
         ),
         NormalIconButton(
-          onPressed: () {},
+          onPressed: () async {
+            await viewModel.signWithGoogle();
+          },
           icon: ClipOval(
             child: SvgPicture.asset(SVGIMagePaths.instance.googleSVG),
           ),
@@ -141,10 +149,12 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  NormalTextButton buildCreateAccountButton() {
+  NormalTextButton buildCreateAccountButton(BuildContext context) {
     return NormalTextButton(
       text: LocaleKeys.createAccount.locale,
-      onPressed: () {},
+      onPressed: () {
+        context.navigateToPage(RegisterView());
+      },
     );
   }
 
@@ -159,7 +169,8 @@ class LoginView extends StatelessWidget {
         onPressed: viewModel.isLoading
             ? null
             : () async {
-                viewModel.checkUserData();
+                await viewModel.checkUserData();
+              
               },
         color: context.appTheme.colorScheme.onSurfaceVariant,
       );
@@ -170,11 +181,7 @@ class LoginView extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: NormalTextButton(
-        text: LocaleKeys.forgotPassword.locale,
-        onPressed: () {},
-      ),
+          text: LocaleKeys.forgotPassword.locale, onPressed: () {}),
     );
   }
-
-
 }

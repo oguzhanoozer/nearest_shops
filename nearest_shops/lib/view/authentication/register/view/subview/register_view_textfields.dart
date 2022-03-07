@@ -5,8 +5,7 @@ extension _RegisterViewTextFields on RegisterView {
       RegisterViewModel viewModel, BuildContext context) {
     return Observer(builder: (_) {
       return TextFormField(
-        validator: (value) =>
-            value!.isNotEmpty ? null : LocaleKeys.theFieldRequired.locale,
+        ///validator: (value) =>             value!.isNotEmpty ? null : LocaleKeys.theFieldRequired.locale,
         controller: viewModel.passwordFirstController,
         obscureText: viewModel.isFirstLockOpen,
         decoration: buildFirstPasswordTextFieldDecoration(context, viewModel),
@@ -39,8 +38,12 @@ extension _RegisterViewTextFields on RegisterView {
       RegisterViewModel viewModel, BuildContext context) {
     return Observer(builder: (_) {
       return TextFormField(
-        validator: (value) =>
-            value!.isNotEmpty ? null : LocaleKeys.theFieldRequired.locale,
+        validator: (value) => value!.isEmpty
+            ? LocaleKeys.theFieldRequired.locale
+            : viewModel.passwordLaterController!.text !=
+                    viewModel.passwordFirstController!.text
+                ? "Passwords are not equals"
+                : null,
         controller: viewModel.passwordLaterController,
         obscureText: viewModel.isLaterLockOpen,
         decoration: buildLaterPasswordTextFieldDecoration(context, viewModel),

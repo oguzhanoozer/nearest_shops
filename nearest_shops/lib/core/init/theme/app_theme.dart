@@ -30,11 +30,12 @@ InputDecorationTheme buildInputDecorationTheme(ITheme theme) {
       floatingLabelStyle: TextStyle(color: theme.colors.colors.orange),
       focusColor: Colors.black12,
       filled: true,
-      errorStyle: TextStyle(color:theme.colors.colors.orange),
+      
+      errorStyle: TextStyle(color:theme.colors.colors.red),
       fillColor: theme.colors.colors.lightGray,
       labelStyle: TextStyle(),
       errorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: theme.colors.colors.orange, width: 0.3),
+        borderSide: BorderSide(color: theme.colors.colors.red, width: 0.3),
         borderRadius: BorderRadius.circular(10),
       ),
       enabledBorder: OutlineInputBorder(

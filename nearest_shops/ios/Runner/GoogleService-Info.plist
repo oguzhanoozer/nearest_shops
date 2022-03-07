@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>821004080274-8oddbagn699gakag2gggh16sb8s9gi50.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.821004080274-8oddbagn699gakag2gggh16sb8s9gi50</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>821004080274-a7ja1bt197ql3ighdurndfneetd0q5oe.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAWvdoZLonVWrvboLho83z64Qh2eGIfEys</string>
+	<key>GCM_SENDER_ID</key>
+	<string>821004080274</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.nearestShops</string>
+	<key>PROJECT_ID</key>
+	<string>nearest-664c3</string>
+	<key>STORAGE_BUCKET</key>
+	<string>nearest-664c3.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:821004080274:ios:58d6fcf94f9007d5c0c24b</string>
+	<key>DATABASE_URL</key>
+	<string>https://nearest-664c3-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

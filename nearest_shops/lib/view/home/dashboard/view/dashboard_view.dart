@@ -3,6 +3,7 @@ import 'package:kartal/kartal.dart';
 
 import '../../../../core/base/view/base_view.dart';
 import '../../../../core/extension/widget_extension.dart';
+import '../../../../core/init/service/firebase_authentication.dart';
 import '../../../product/contstants/image_path.dart';
 import '../../../product/grid/product_grid.dart';
 import '../../../product/slider/dashboard_ads_slider.dart';
@@ -50,6 +51,11 @@ class DashboardView extends StatelessWidget {
         pinned: false,
         actions: [buildAppBarActionsContainer(context)],
         title: buildAppBarTitle(context),
+        leading: IconButton(
+            onPressed: () async {
+              await FirebaseAuthentication.instance.signOut();
+            },
+            icon: Icon(Icons.logout)),
         flexibleSpace: buildFlexibleSpaceBar(context));
   }
 

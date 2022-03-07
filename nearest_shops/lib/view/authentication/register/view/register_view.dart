@@ -8,6 +8,7 @@ import '../../../../core/components/button/text_button.dart';
 import '../../../../core/components/column/form_column.dart';
 import '../../../../core/extension/string_extension.dart';
 import '../../../../core/init/lang/locale_keys.g.dart';
+import '../../login/view/login_view.dart';
 import '../viewmodel/register_view_model.dart';
 
 part 'subview/register_view_textfields.dart';
@@ -19,7 +20,10 @@ class RegisterView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseView<RegisterViewModel>(
         viewModel: RegisterViewModel(),
-        onModelReady: (model) {},
+        onModelReady: (model) {
+          model.setContext(context);
+          model.init();
+        },
         onPageBuilder: (BuildContext context, RegisterViewModel viewModel) {
           return buildScaffold(context, viewModel);
         });
@@ -27,18 +31,19 @@ class RegisterView extends StatelessWidget {
 
   Scaffold buildScaffold(BuildContext context, RegisterViewModel viewModel) =>
       Scaffold(
+          key: viewModel.scaffoldState,
           body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Spacer(
-            flex: 1,
-          ),
-          Expanded(
-            flex: 4,
-            child: buildLoginForm(context, viewModel),
-          ),
-        ],
-      ));
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Spacer(
+                flex: 1,
+              ),
+              Expanded(
+                flex: 4,
+                child: buildLoginForm(context, viewModel),
+              ),
+            ],
+          ));
 
   Container buildLoginForm(BuildContext context, RegisterViewModel viewModel) {
     return Container(
@@ -64,7 +69,7 @@ class RegisterView extends StatelessWidget {
         Spacer(
           flex: 3,
         ),
-        buildLoginButton(context, viewModel),
+        buildRegisterButton(context, viewModel),
         Spacer(
           flex: 6,
         ),
@@ -94,7 +99,8 @@ class RegisterView extends StatelessWidget {
     );
   }
 
-  Widget buildLoginButton(BuildContext context, RegisterViewModel viewModel) {
+  Widget buildRegisterButton(
+      BuildContext context, RegisterViewModel viewModel) {
     return Observer(builder: (_) {
       return NormalButton(
         child: Text(
@@ -105,7 +111,8 @@ class RegisterView extends StatelessWidget {
         onPressed: viewModel.isLoading
             ? null
             : () async {
-                viewModel.checkUserData();
+              await  viewModel.checkUserData(context);
+            ///    context.navigateToPage(LoginView());
               },
         color: context.appTheme.colorScheme.onSurfaceVariant,
       );

@@ -1,7 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kartal/kartal.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../../core/base/model/base_view_model.dart';
+import '../../../../core/init/service/firebase_authentication.dart';
+import '../../../product/showdialog/show_dialog.dart';
+import '../../login/view/login_view.dart';
 
 part 'register_view_model.g.dart';
 
@@ -29,14 +34,32 @@ abstract class _RegisterViewModelBase with Store, BaseViewModel {
     emailController = TextEditingController();
     passwordFirstController = TextEditingController();
     passwordLaterController = TextEditingController();
+    passwordFirstController!.text = "123456";
+    passwordLaterController!.text = "123456";
+    emailController!.text = "oguzoozer@gmail.com";
   }
 
-  void checkUserData() {
+  Future<void> checkUserData(BuildContext context) async {
     isLoadingChange();
     if (formState.currentState!.validate()) {
-      if (scaffoldState.currentState != null) {
-        scaffoldState.currentState!
-            .showSnackBar(SnackBar(content: Text("oeky")));
+      try {
+        final user = await FirebaseAuthentication.instance
+            .createUserWithEmailandPassword(
+                email: emailController!.text,
+                password: passwordLaterController!.text);
+        if (!user!.emailVerified) {
+          await user.sendEmailVerification();
+        }
+        await FirebaseAuthentication.instance.signOut();
+        await ShowAlertDialog.instance.getAlertDialog(context);
+         context.navigateToPage(LoginView());
+      } on FirebaseAuthException catch (e) {
+        if (scaffoldState.currentState != null) {
+          scaffoldState.currentState!
+              .showSnackBar(SnackBar(content: Text(e.message.toString())));
+
+         /// Navigator.pop(context);
+        }
       }
     }
     isLoadingChange();
