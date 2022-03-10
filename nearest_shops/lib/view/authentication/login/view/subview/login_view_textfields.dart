@@ -7,6 +7,7 @@ extension _LoginViewTextFields on LoginView {
       return TextFormField(
         validator: (value) =>
             value!.isNotEmpty ? null : LocaleKeys.theFieldRequired.locale,
+            keyboardType: TextInputType.visiblePassword,
         controller: viewModel.passwordController,
         obscureText: viewModel.isLockOpen,
         decoration: buildPasswordTextFieldDecoration(context, viewModel),
@@ -39,6 +40,7 @@ extension _LoginViewTextFields on LoginView {
     return TextFormField(
       validator: (value) =>
           value!.isValidEmail ? null : LocaleKeys.enterValidEmail.locale,
+          keyboardType: TextInputType.emailAddress,
       controller: viewModel.emailController,
       decoration: buildEmailTextFieldDecoration(context),
     );

@@ -11,6 +11,7 @@ import '../../../../core/components/column/form_column.dart';
 import '../../../../core/extension/string_extension.dart';
 import '../../../../core/init/lang/locale_keys.g.dart';
 import '../../../product/contstants/image_path_svg.dart';
+import '../../onboard/view/on_board_option_view.dart';
 import '../../onboard/view/onboard_view.dart';
 import '../../register/view/register_view.dart';
 import '../viewmodel/login_view_model.dart';
@@ -39,12 +40,9 @@ class LoginView extends StatelessWidget {
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Spacer(
-                flex: 1,
-              ),
               Expanded(
-                flex: 4,
-                child: buildLoginForm(context, viewModel),
+                child: SingleChildScrollView(
+                    child: buildLoginForm(context, viewModel)),
               ),
             ],
           ));
@@ -61,30 +59,18 @@ class LoginView extends StatelessWidget {
   Widget buildFormColumn(LoginViewModel viewModel, BuildContext context) {
     return FormColumn(
       children: [
+        context.emptySizedHeightBoxNormal,
         buildWelcomeTextColumnBuild(context),
-        Spacer(
-          flex: 5,
-        ),
+        context.emptySizedHeightBoxHigh,
         buildEmailTextField(viewModel, context),
-
-        SizedBox(height: context.lowValue),
-        //Spacer(),
+        context.emptySizedHeightBoxLow,
         buildPasswordTextField(viewModel, context),
         buildForgotPasswordText(),
-
-        Spacer(
-          flex: 5,
-        ),
+        context.emptySizedHeightBoxNormal,
         buildLoginButton(context, viewModel),
-
         buildCreateAccountButton(context),
-        Spacer(
-          flex: 4,
-        ),
+        context.emptySizedHeightBoxLow,
         buildSocialMediaIcons(context, viewModel),
-        Spacer(
-          flex: 1,
-        ),
       ],
     );
   }
@@ -153,7 +139,7 @@ class LoginView extends StatelessWidget {
     return NormalTextButton(
       text: LocaleKeys.createAccount.locale,
       onPressed: () {
-        context.navigateToPage(RegisterView());
+        context.navigateToPage(OnBoardOptionView());
       },
     );
   }
@@ -170,7 +156,6 @@ class LoginView extends StatelessWidget {
             ? null
             : () async {
                 await viewModel.checkUserData();
-              
               },
         color: context.appTheme.colorScheme.onSurfaceVariant,
       );

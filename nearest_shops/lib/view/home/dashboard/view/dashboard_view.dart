@@ -27,22 +27,81 @@ class DashboardView extends StatelessWidget {
   Scaffold buildScaffold(BuildContext context, DashboardViewModel viewmodel) =>
       Scaffold(
         body: Padding(
-            padding: context.paddingNormal,
-            child: CustomScrollView(
-              slivers: [
-                buildSliverApp(context),
+          padding: context.paddingNormal,
+          child: CustomScrollView(
+            slivers: [
+              buildSliverApp(context),
+              SizedBox(
+                height: context.dynamicHeight(0.25),
+                child: DashboardAdsSlider(
+                    dashboardModelList: viewmodel.dashboardModelList,
+                    onlyImage: false),
+              ).toSliver,
+              buildCategoriesText(context).toSliver,
+              //buildCategoriesTabBar(context).toSliver,
+              buildCategoriesRow(context).toSliver,
+              buildProductsGrid(context, viewmodel).toSliver,
+            ],
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          elevation: 4.0,
+          onPressed: () async {
+            await viewmodel.callFirestore();
+          },
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            margin: EdgeInsets.only(left: 12.0, right: 12.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                IconButton(
+                  //update the bottom app bar view each time an item is clicked
+                  onPressed: () {},
+                  iconSize: 27.0,
+                  icon: Icon(
+                    Icons.home,
+                    //darken the icon if it is selected or else give it a different color
+                    color: Colors.grey.shade400,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  iconSize: 27.0,
+                  icon: Icon(Icons.category_outlined,
+                      color: Colors.blue.shade900),
+                ),
+                //to leave space in between the bottom app bar items and below the FAB
                 SizedBox(
-                  height: context.dynamicHeight(0.25),
-                  child: DashboardAdsSlider(
-                      dashboardModelList: viewmodel.dashboardModelList,
-                      onlyImage: false),
-                ).toSliver,
-                buildCategoriesText(context).toSliver,
-                //buildCategoriesTabBar(context).toSliver,
-                buildCategoriesRow(context).toSliver,
-                buildProductsGrid(context, viewmodel).toSliver,
+                  width: 50.0,
+                ),
+                IconButton(
+                  onPressed: () {},
+                  iconSize: 27.0,
+                  icon: Icon(
+                    Icons.favorite,
+                    color: Colors.grey.shade400,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  iconSize: 27.0,
+                  icon: Icon(
+                    Icons.person,
+                    color: Colors.grey.shade400,
+                  ),
+                ),
               ],
-            )),
+            ),
+          ),
+          //to add a space between the FAB and BottomAppBar
+          shape: CircularNotchedRectangle(),
+          //color of the BottomAppBar
+          color: Colors.white,
+        ),
       );
 
   SliverAppBar buildSliverApp(BuildContext context) {

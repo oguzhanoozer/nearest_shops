@@ -1,12 +1,11 @@
-part of '../register_view.dart';
+part of '../shop_owner_register_view.dart';
 
-extension _RegisterViewTextFields on RegisterView {
+extension _RegisterOwnerExtension on ShopOwnerRegisterView {
   Widget buildFirstPasswordTextField(
-      RegisterViewModel viewModel, BuildContext context) {
+      ShopOwnerRegisterViewModel viewModel, BuildContext context) {
     return Observer(builder: (_) {
       return TextFormField(
         ///validator: (value) =>             value!.isNotEmpty ? null : LocaleKeys.theFieldRequired.locale,
-        keyboardType: TextInputType.visiblePassword,
         controller: viewModel.passwordFirstController,
         obscureText: viewModel.isFirstLockOpen,
         decoration: buildFirstPasswordTextFieldDecoration(context, viewModel),
@@ -15,7 +14,7 @@ extension _RegisterViewTextFields on RegisterView {
   }
 
   InputDecoration buildFirstPasswordTextFieldDecoration(
-      BuildContext context, RegisterViewModel viewModel) {
+      BuildContext context, ShopOwnerRegisterViewModel viewModel) {
     return InputDecoration(
       labelStyle: context.textTheme.subtitle1,
       label: Text(
@@ -27,6 +26,7 @@ extension _RegisterViewTextFields on RegisterView {
         onPressed: () {
           viewModel.isFirstLockStateChange();
         },
+        //      padding: EdgeInsets.zero,
         child: Observer(builder: (_) {
           return Icon(viewModel.isFirstLockOpen ? Icons.lock : Icons.lock_open);
         }),
@@ -35,7 +35,7 @@ extension _RegisterViewTextFields on RegisterView {
   }
 
   Widget buildLaterPasswordTextField(
-      RegisterViewModel viewModel, BuildContext context) {
+      ShopOwnerRegisterViewModel viewModel, BuildContext context) {
     return Observer(builder: (_) {
       return TextFormField(
         validator: (value) => value!.isEmpty
@@ -44,7 +44,6 @@ extension _RegisterViewTextFields on RegisterView {
                     viewModel.passwordFirstController!.text
                 ? "Passwords are not equals"
                 : null,
-        keyboardType: TextInputType.visiblePassword,
         controller: viewModel.passwordLaterController,
         obscureText: viewModel.isLaterLockOpen,
         decoration: buildLaterPasswordTextFieldDecoration(context, viewModel),
@@ -53,7 +52,7 @@ extension _RegisterViewTextFields on RegisterView {
   }
 
   InputDecoration buildLaterPasswordTextFieldDecoration(
-      BuildContext context, RegisterViewModel viewModel) {
+      BuildContext context, ShopOwnerRegisterViewModel viewModel) {
     return InputDecoration(
       labelStyle: context.textTheme.subtitle1,
       label: Text(
@@ -74,7 +73,7 @@ extension _RegisterViewTextFields on RegisterView {
   }
 
   TextFormField buildEmailTextField(
-      RegisterViewModel viewModel, BuildContext context) {
+      ShopOwnerRegisterViewModel viewModel, BuildContext context) {
     return TextFormField(
       validator: (value) =>
           value!.isValidEmail ? null : LocaleKeys.enterValidEmail.locale,
@@ -90,6 +89,61 @@ extension _RegisterViewTextFields on RegisterView {
         label: Text(LocaleKeys.email.locale),
         icon: buildContainerIconField(context, Icons.email),
         hintText: "example@email.com");
+  }
+
+  TextFormField buildNameTextField(
+      ShopOwnerRegisterViewModel viewModel, BuildContext context) {
+    return TextFormField(
+      validator: (value) {},
+      keyboardType: TextInputType.streetAddress,
+      controller: viewModel.businessNameController,
+      decoration: buildNameTextFieldDecoration(context),
+    );
+  }
+
+  InputDecoration buildNameTextFieldDecoration(BuildContext context) {
+    return InputDecoration(
+        labelStyle: context.textTheme.subtitle1,
+        label: Text("Business Name"),
+        icon: buildContainerIconField(context, Icons.shop),
+        hintText: "A Shop");
+  }
+
+  TextFormField buildAdressTextField(
+      ShopOwnerRegisterViewModel viewModel, BuildContext context) {
+    return TextFormField(
+      keyboardType: TextInputType.streetAddress,
+      maxLines: 3,
+      validator: (value) {},
+      controller: viewModel.businessAdressController,
+      decoration: buildAdressTextFieldDecoration(context),
+    );
+  }
+
+  InputDecoration buildAdressTextFieldDecoration(BuildContext context) {
+    return InputDecoration(
+        labelStyle: context.textTheme.subtitle1,
+        label: Text("Business Address"),
+        icon: buildContainerIconField(context, Icons.location_on),
+        hintText: "1. Street");
+  }
+
+  TextFormField buildPhoneTextField(
+      ShopOwnerRegisterViewModel viewModel, BuildContext context) {
+    return TextFormField(
+      validator: (value) {},
+      keyboardType: TextInputType.phone,
+      controller: viewModel.businessPhoneController,
+      decoration: buildPhoneTextFieldDecoration(context),
+    );
+  }
+
+  InputDecoration buildPhoneTextFieldDecoration(BuildContext context) {
+    return InputDecoration(
+        labelStyle: context.textTheme.subtitle1,
+        label: Text("Business Phone Number"),
+        icon: buildContainerIconField(context, Icons.phone),
+        hintText: "05987654321");
   }
 
   Container buildContainerIconField(BuildContext context, IconData icon) {

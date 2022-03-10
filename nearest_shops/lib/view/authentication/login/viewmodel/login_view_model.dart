@@ -42,6 +42,7 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
                 email: emailController!.text,
                 password: passwordController!.text);
         if (!user!.emailVerified) {
+        
           await FirebaseAuthentication.instance.signOut();
           await getAlertDialog(context!);
         }

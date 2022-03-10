@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:kartal/kartal.dart';
-
+import 'package:nearest_shops/core/extension/string_extension.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../../../../core/components/button/normal_button.dart';
-import '../../../../core/components/button/text_button.dart';
 import '../../../../core/components/column/form_column.dart';
-import '../../../../core/extension/string_extension.dart';
 import '../../../../core/init/lang/locale_keys.g.dart';
-import '../../login/view/login_view.dart';
-import '../viewmodel/register_view_model.dart';
+import '../viewmodel/shop_owner_login_view_model.dart';
 
-part 'subview/register_view_textfields.dart';
+part 'subview/owner_register_extension.dart';
 
-class RegisterView extends StatelessWidget {
-  const RegisterView({Key? key}) : super(key: key);
+class ShopOwnerRegisterView extends StatelessWidget {
+  const ShopOwnerRegisterView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BaseView<RegisterViewModel>(
-        viewModel: RegisterViewModel(),
-        onModelReady: (model) {
-          model.setContext(context);
-          model.init();
-        },
-        onPageBuilder: (BuildContext context, RegisterViewModel viewModel) {
-          return buildScaffold(context, viewModel);
-        });
+    return BaseView<ShopOwnerRegisterViewModel>(
+      viewModel: ShopOwnerRegisterViewModel(),
+      onModelReady: (model) {
+        model.setContext(context);
+        model.init();
+      },
+      onPageBuilder:
+          (BuildContext context, ShopOwnerRegisterViewModel viewModel) {
+        return buildScaffold(context, viewModel);
+      },
+    );
   }
 
-  Scaffold buildScaffold(BuildContext context, RegisterViewModel viewModel) =>
+  Scaffold buildScaffold(
+          BuildContext context, ShopOwnerRegisterViewModel viewModel) =>
       Scaffold(
           key: viewModel.scaffoldState,
           body: Column(
@@ -42,7 +42,8 @@ class RegisterView extends StatelessWidget {
             ],
           ));
 
-  Container buildLoginForm(BuildContext context, RegisterViewModel viewModel) {
+  Container buildLoginForm(
+      BuildContext context, ShopOwnerRegisterViewModel viewModel) {
     return Container(
       child: Form(
         key: viewModel.formState,
@@ -51,18 +52,25 @@ class RegisterView extends StatelessWidget {
     );
   }
 
-  Widget buildFormColumn(RegisterViewModel viewModel, BuildContext context) {
+  Widget buildFormColumn(
+      ShopOwnerRegisterViewModel viewModel, BuildContext context) {
     return FormColumn(
       children: [
         context.emptySizedHeightBoxHigh,
         buildWelcomeTextColumnBuild(context),
-        context.emptySizedHeightBoxNormal,
+        context.emptySizedHeightBoxLow,
+        buildNameTextField(viewModel, context),
+        context.emptySizedHeightBoxLow,
+        buildAdressTextField(viewModel, context),
+        context.emptySizedHeightBoxLow,
+        buildPhoneTextField(viewModel, context),
+        context.emptySizedHeightBoxLow,
         buildEmailTextField(viewModel, context),
-        context.emptySizedHeightBoxNormal,
+        context.emptySizedHeightBoxLow,
         buildFirstPasswordTextField(viewModel, context),
-        context.emptySizedHeightBoxNormal,
+        context.emptySizedHeightBoxLow,
         buildLaterPasswordTextField(viewModel, context),
-        context.emptySizedHeightBoxNormal,
+        context.emptySizedHeightBoxHigh,
         buildRegisterButton(context, viewModel),
       ],
     );
@@ -74,8 +82,8 @@ class RegisterView extends StatelessWidget {
         Align(
           alignment: AlignmentDirectional.centerStart,
           child: Text(
-            LocaleKeys.createAccount.locale,
-            style: context.textTheme.headline4!
+            "Welcome to business",
+            style: context.textTheme.headline5!
                 .copyWith(color: context.colorScheme.onPrimary),
           ),
         ),
@@ -83,15 +91,8 @@ class RegisterView extends StatelessWidget {
     );
   }
 
-  NormalTextButton buildCreateAccountButton() {
-    return NormalTextButton(
-      text: LocaleKeys.createAccount.locale,
-      onPressed: () {},
-    );
-  }
-
   Widget buildRegisterButton(
-      BuildContext context, RegisterViewModel viewModel) {
+      BuildContext context, ShopOwnerRegisterViewModel viewModel) {
     return Observer(builder: (_) {
       return NormalButton(
         child: Text(
@@ -99,21 +100,9 @@ class RegisterView extends StatelessWidget {
           style: context.textTheme.headline6!
               .copyWith(color: context.colorScheme.onSecondary),
         ),
-        onPressed: viewModel.isLoading
-            ? null
-            : () async {
-                await viewModel.checkUserData(context);
-              },
+        onPressed: viewModel.isLoading ? null : () async {},
         color: context.appTheme.colorScheme.onSurfaceVariant,
       );
     });
-  }
-
-  Container buildContainerIconField(BuildContext context, IconData icon) {
-    return Container(
-      // color: context.colors.onError,
-      padding: context.paddingLow,
-      child: Icon(icon, color: context.appTheme.colorScheme.onSurfaceVariant),
-    );
   }
 }
